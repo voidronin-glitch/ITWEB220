@@ -1,0 +1,63 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Calculation and Triangle App</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        #output {
+            white-space: pre;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Open your browser console to see the calculation, and view the triangle below.</h2>
+    <h3>Triangle Output:</h3>
+    <div id="output"></div>
+
+    <script>
+        // Prompt user for information
+        let userName = prompt('Please enter your name: ');
+        let var1 = prompt('Please enter a number between 1 and 10: ');
+        let var2 = prompt('Please enter a number between 11 and 20: ');
+
+        // Convert to numbers
+        var1 = Number(var1);
+        var2 = Number(var2);
+
+        // Multiply and store in userResult
+        let userResult = var1 * var2;
+
+        // Thank the user and display result
+        console.log("Thank you, " + userName + ". The result is " + userResult + ".");
+
+        // Now draw a triangle using var1 as the number of lines
+        function drawTriangle(lines) {
+            const outputDiv = document.getElementById("output");
+            let result = "";
+
+            for (let i = 1; i <= lines; i++) { // outer loop for rows
+                let line = "";
+                for (let j = 1; j <= i; j++) { // inner loop for stars
+                    line += "*";
+                }
+                result += line + "\n"; // add a new line
+            }
+
+            outputDiv.textContent = result;
+        }
+
+        // Call drawTriangle using the first number as the triangle height
+        drawTriangle(var1);
+    </script>
+</body>
+</html>
