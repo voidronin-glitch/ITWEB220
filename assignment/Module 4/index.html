@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Word Counter</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 150px; font-size: 16px; }
+        .metrics { margin-top: 15px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h2>Live Word and Text Analysis</h2>
+    <textarea id="textInput" placeholder="Type your text here..."></textarea>
+    
+    <div class="metrics">
+        <p>Total Words: <span id="wordCount">0</span></p>
+        <p>Complicated Words (>10 chars): <span id="complicatedCount">0</span></p>
+        <p>Total Sentences: <span id="sentenceCount">0</span></p>
+        <p>Total Characters: <span id="characterCount">0</span></p>
+    </div>
+
+    <script>
+        const textInput = document.getElementById("textInput");
+        const wordCountDisplay = document.getElementById("wordCount");
+        const complicatedCountDisplay = document.getElementById("complicatedCount");
+        const sentenceCountDisplay = document.getElementById("sentenceCount");
+        const characterCountDisplay = document.getElementById("characterCount");
+
+        textInput.addEventListener("input", () => {
+            const text = textInput.value.trim();
+
+            // Count words
+            const words = text === "" ? [] : text.split(/\s+/);
+            const wordCount = words.length;
+
+            // Count complicated words (> 10 chars)
+            const complicatedWords = words.filter(word => word.length > 10).length;
+
+            // Count sentences (using ., !, ? as delimiters)
+            const sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim() !== "").length;
+
+            // Count characters (excluding whitespace)
+            const characters = text.replace(/\s/g, "").length;
+
+            // Update displays
+            wordCountDisplay.textContent = wordCount;
+            complicatedCountDisplay.textContent = complicatedWords;
+            sentenceCountDisplay.textContent = sentences;
+            characterCountDisplay.textContent = characters;
+        });
+    </script>
+</body>
+</html>
